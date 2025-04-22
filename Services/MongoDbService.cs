@@ -1,10 +1,23 @@
-namespace AuthSystem.Configuration
+// File: Services/MongoDbService.cs
+using Server.Configuration;
+using Server.Models;
+using Server.Services.Interfaces;
+using Microsoft.Extensions.Options;
+using MongoDB.Driver;
+
+namespace Server.Services
 {
-    public class MongoDbSettings
+    public class MongoDbService : IMongoDbService
     {
-        public string ConnectionString { get; set; } = string.Empty;
-        public string DatabaseName { get; set; } = string.Empty;
-        public string UsersCollection { get; set; } = string.Empty;
-        public string TokensCollection { get; set; } = string.Empty;
+        private readonly IMongoDatabase _database;
+
+        public MongoDbService(IOptions<MongoDbSettings> settings)
+        {
+            var client = new MongoClient(settings.Value.ConnectionString);
+            _database = client.GetDatabase(settings.Value.DatabaseName);
+        }
+
+        public IMongoCollection<User> Users => _database.GetCollection<User>("Users");
+        public IMongoCollection<Token> Tokens => _database.GetCollection<Token>("Tokens");
     }
 }

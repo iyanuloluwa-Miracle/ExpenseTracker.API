@@ -1,7 +1,7 @@
 // File: Controllers/AuthController.cs
-using AuthSystem.DTOs;
-using AuthSystem.Models;
-using AuthSystem.Services.Interfaces;
+using Server.DTOs;
+using Server.Models;
+using Server.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;

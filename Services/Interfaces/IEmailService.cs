@@ -1,5 +1,5 @@
 // File: Services/Interfaces/IEmailService.cs
-namespace AuthSystem.Services.Interfaces
+namespace Server.Services.Interfaces
 {
     public interface IEmailService
     {

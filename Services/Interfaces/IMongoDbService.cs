@@ -1,8 +1,8 @@
 // File: Services/Interfaces/IMongoDbService.cs
-using AuthSystem.Models;
+using Server.Models;
 using MongoDB.Driver;
 
-namespace AuthSystem.Services.Interfaces
+namespace Server.Services.Interfaces
 {
     public interface IMongoDbService
     {

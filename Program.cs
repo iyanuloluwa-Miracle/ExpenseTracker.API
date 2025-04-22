@@ -1,6 +1,6 @@
-using AuthSystem.Configuration;
-using AuthSystem.Services;
-using AuthSystem.Services.Interfaces;
+using Server.Configuration;
+using Server.Services;
+using Server.Services.Interfaces;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
