@@ -1,11 +1,11 @@
 // File: Controllers/AuthController.cs
-using Server.DTOs;
+using Server.DTOs; // Add this for DTOs
 using Server.Models;
 using Server.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
-using System.IdentityModel.Tokens.Jwt;
+using System.IdentityModel.Tokens.Jwt; // Add this for JWT
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
