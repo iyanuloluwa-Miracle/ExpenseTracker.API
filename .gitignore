@@ -1,0 +1,66 @@
+# .gitignore for ASP.NET Core WebAPI
+
+### Project Artifacts ###
+bin/
+obj/
+[Bb]uild/
+[Oo]bj/
+*.dll
+*.pdb
+*.exe
+*.cache
+
+### IDE & Editor ###
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+*.sln.iml
+*.swp
+*.code-workspace
+.history/
+
+### Dependencies ###
+[Nn]u[Gg]et/
+packages/
+*.nupkg
+node_modules/
+bower_components/
+
+### Environment & Configs ###
+appsettings.Development.json
+.env
+.env.local
+*.backup.*
+secrets.json
+
+### Logs & Temp Files ###
+[Tt]emp/
+*.log
+*.etl
+*.csv
+*.dump
+
+### Test Results ###
+[Tt]est[Rr]esults/
+[Ll]og/
+[Ll]ogs/
+
+### OS Junk ###
+.DS_Store
+Thumbs.db
+desktop.ini
+
+### Azure ###
+*.azurePubxml
+*.publishsettings
+
+### Compiled Source ###
+**/*.js
+**/*.js.map
+!wwwroot/js/*.min.js
+
+### Rider ###
+_ReSharper.*
+*.sln.ide
