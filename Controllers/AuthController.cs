@@ -10,7 +10,7 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace AuthSystem.Controllers
+namespace Server.Controllers
 {
     [ApiController]
     [Route("api/auth")]
