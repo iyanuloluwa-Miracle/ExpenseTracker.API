@@ -5,7 +5,6 @@ using Server.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using MongoDB.Driver;
-using System.IdentityModel.Tokens.Jwt; // Add this for JWT
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
