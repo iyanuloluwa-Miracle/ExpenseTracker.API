@@ -68,6 +68,20 @@ builder.Configuration["JwtSettings:Issuer"] = Environment.GetEnvironmentVariable
 builder.Configuration["JwtSettings:Audience"] = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ??
     throw new InvalidOperationException("JWT_AUDIENCE is not set");
 
+
+
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder => builder.AllowAnyOrigin()
+            .AllowAnyMethod()
+            .AllowAnyHeader());
+});
+
+
+
+
 // Add Authentication and Authorization services
 builder.Services.AddAuthentication();
 builder.Services.AddAuthorization();

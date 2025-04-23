@@ -114,7 +114,9 @@ namespace Server.Controllers
             // Generate JWT token
             string token = GenerateJwtToken(user);
 
-            return Ok(new LoginResponse { Token = token });
+            return Ok(new LoginResponse { 
+                Token = token, 
+            });
         }
 
         [HttpPost("forgot-password")]
