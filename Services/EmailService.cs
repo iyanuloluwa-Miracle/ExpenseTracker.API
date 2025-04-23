@@ -30,7 +30,7 @@ namespace Server.Services
             using var client = new SmtpClient(_emailSettings.SmtpServer, _emailSettings.SmtpPort)
             {
                 Credentials = new NetworkCredential(_emailSettings.SmtpUsername, _emailSettings.SmtpPassword),
-                EnableSsl = _emailSettings.EnableSsl
+                EnableSsl = true
             };
 
             await client.SendMailAsync(message);

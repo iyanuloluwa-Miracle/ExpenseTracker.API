@@ -191,27 +191,30 @@ namespace Server.Controllers
         }
 
         private string GenerateJwtToken(User user)
-        {
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Email, user.Email)
-            };
+{
+    var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.NameIdentifier, user.Id),
+        new Claim(ClaimTypes.Email, user.Email)
+    };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.AddDays(1);
+    var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY") ?? 
+        throw new InvalidOperationException("JWT_KEY is not set");
+    
+    var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey));
+    var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+    var expires = DateTime.Now.AddDays(1);
 
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JwtSettings:Issuer"],
-                audience: _configuration["JwtSettings:Audience"],
-                claims: claims,
-                expires: expires,
-                signingCredentials: creds
-            );
+    var token = new JwtSecurityToken(
+        issuer: Environment.GetEnvironmentVariable("JWT_ISSUER"),
+        audience: Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
+        claims: claims,
+        expires: expires,
+        signingCredentials: creds
+    );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
+    return new JwtSecurityTokenHandler().WriteToken(token);
+}
 
         private void CreatePasswordHash(string password, out string passwordHash, out string passwordSalt)
         {

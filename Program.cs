@@ -33,10 +33,17 @@ builder.Services.Configure<EmailSettings>(options =>
     options.SmtpPassword = Environment.GetEnvironmentVariable("EMAIL_SMTP_PASSWORD") ?? throw new InvalidOperationException("EMAIL_SMTP_PASSWORD is not set");
     options.FromAddress = Environment.GetEnvironmentVariable("EMAIL_FROM_ADDRESS") ?? throw new InvalidOperationException("EMAIL_FROM_ADDRESS is not set");
     options.FromName = Environment.GetEnvironmentVariable("EMAIL_FROM_NAME") ?? throw new InvalidOperationException("EMAIL_FROM_NAME is not set");
+    options.EnableSsl = bool.Parse(Environment.GetEnvironmentVariable("EMAIL_ENABLE_SSL") ?? "true");
 });
 builder.Services.AddTransient<IEmailService, EmailService>();
 
 // Configure JWT Authentication
+var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY") ??
+    throw new InvalidOperationException("JWT_KEY is not set");
+
+// Ensure compatible versions of System.IdentityModel.Tokens.Jwt and Microsoft.IdentityModel.Tokens are installed.
+// Update NuGet packages if necessary to resolve version conflicts.
+
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -46,11 +53,20 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             ValidateAudience = true,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
-            ValidIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER") ?? throw new InvalidOperationException("JWT_ISSUER is not set"),
-            ValidAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ?? throw new InvalidOperationException("JWT_AUDIENCE is not set"),
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY") ?? throw new InvalidOperationException("JWT_KEY is not set")))
+            ValidIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER") ??
+                throw new InvalidOperationException("JWT_ISSUER is not set"),
+            ValidAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ??
+                throw new InvalidOperationException("JWT_AUDIENCE is not set"),
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
         };
     });
+
+// Add JWT configuration to IConfiguration for use in controllers
+builder.Configuration["JwtSettings:Key"] = jwtKey;
+builder.Configuration["JwtSettings:Issuer"] = Environment.GetEnvironmentVariable("JWT_ISSUER") ??
+    throw new InvalidOperationException("JWT_ISSUER is not set");
+builder.Configuration["JwtSettings:Audience"] = Environment.GetEnvironmentVariable("JWT_AUDIENCE") ??
+    throw new InvalidOperationException("JWT_AUDIENCE is not set");
 
 // Add Authentication and Authorization services
 builder.Services.AddAuthentication();
