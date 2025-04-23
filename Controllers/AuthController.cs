@@ -1,5 +1,5 @@
 // File: Controllers/AuthController.cs
-using Server.DTOs; // Add this for DTOs
+using Server.DTOs;
 using Server.Models;
 using Server.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -8,6 +8,7 @@ using MongoDB.Driver;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Server.Controllers
 {

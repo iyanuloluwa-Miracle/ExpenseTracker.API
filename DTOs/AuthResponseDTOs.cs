@@ -1,5 +1,5 @@
 // File: DTOs/AuthResponseDTOs.cs
-namespace AuthSystem.DTOs
+namespace Server.DTOs
 {
     public class MessageResponse
     {

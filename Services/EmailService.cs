@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 using System.Net;
 using System.Net.Mail;
 
-namespace AuthSystem.Services
+namespace Server.Services
 {
     public class EmailService : IEmailService
     {
@@ -20,7 +20,7 @@ namespace AuthSystem.Services
         {
             var message = new MailMessage
             {
-                From = new MailAddress(_emailSettings.SenderEmail, _emailSettings.SenderName),
+                From = new MailAddress(_emailSettings.FromAddress, _emailSettings.FromName),
                 Subject = subject,
                 Body = body,
                 IsBodyHtml = isHtml
@@ -29,7 +29,7 @@ namespace AuthSystem.Services
 
             using var client = new SmtpClient(_emailSettings.SmtpServer, _emailSettings.SmtpPort)
             {
-                Credentials = new NetworkCredential(_emailSettings.SenderEmail, _emailSettings.Password),
+                Credentials = new NetworkCredential(_emailSettings.SmtpUsername, _emailSettings.SmtpPassword),
                 EnableSsl = _emailSettings.EnableSsl
             };
 
