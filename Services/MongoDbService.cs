@@ -19,5 +19,11 @@ namespace Server.Services
 
         public IMongoCollection<User> Users => _database.GetCollection<User>("Users");
         public IMongoCollection<Token> Tokens => _database.GetCollection<Token>("Tokens");
+
+
+
+
+        public IMongoCollection<Expense> Expenses => _database.GetCollection<Expense>("expenses");
+        public IMongoCollection<Category> Categories => _database.GetCollection<Category>("categories");
     }
 }

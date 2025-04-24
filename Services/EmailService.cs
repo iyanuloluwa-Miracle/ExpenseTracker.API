@@ -39,7 +39,7 @@ namespace Server.Services
         public async Task SendVerificationEmailAsync(string email, string token)
         {
             string subject = "Verify Your Email Address";
-            string verificationUrl = $"https://yourapp.com/verify-email?token={token}";
+            string verificationUrl = $"http://localhost:5130/Accounts/Register/verify-email?token={token}";
             string body = $@"
                 <html>
                 <body>
@@ -56,7 +56,7 @@ namespace Server.Services
         public async Task SendPasswordResetEmailAsync(string email, string token)
         {
             string subject = "Reset Your Password";
-            string resetUrl = $"https://yourapp.com/reset-password?token={token}";
+            string resetUrl = $"http://localhost:5130/Accounts/ForgotPassword?token={token}";
             string body = $@"
                 <html>
                 <body>

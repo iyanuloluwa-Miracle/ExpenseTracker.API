@@ -6,6 +6,12 @@ namespace Server.Services.Interfaces
 {
     public interface IMongoDbService
     {
+
+
+
+        IMongoCollection<Expense> Expenses { get; }
+
+        
         IMongoCollection<User> Users { get; }
         IMongoCollection<Token> Tokens { get; }
 
