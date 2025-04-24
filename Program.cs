@@ -37,6 +37,15 @@ builder.Services.Configure<EmailSettings>(options =>
 });
 builder.Services.AddTransient<IEmailService, EmailService>();
 
+
+
+
+// Configure Services
+builder.Services.AddScoped<IExpenseService, ExpenseService>();
+
+// builder.Services.AddScoped<ICategoryService, CategoryService>();
+// builder.Services.AddScoped<IDashboardService, DashboardService>();
+
 // Configure JWT Authentication
 var jwtKey = Environment.GetEnvironmentVariable("JWT_KEY") ??
     throw new InvalidOperationException("JWT_KEY is not set");

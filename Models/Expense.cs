@@ -3,7 +3,7 @@ using MongoDB.Bson.Serialization.Attributes;
 
 namespace Server.Models
 {
-    public class Category
+    public class Expense
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -12,8 +12,10 @@ namespace Server.Models
         [BsonRepresentation(BsonType.ObjectId)]
         public string UserId { get; set; }
 
-        public string Name { get; set; }
-        public string Color { get; set; }
+        public decimal Amount { get; set; }
+        public string Description { get; set; }
+        public string CategoryId { get; set; }
+        public DateTime Date { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? UpdatedAt { get; set; }
     }

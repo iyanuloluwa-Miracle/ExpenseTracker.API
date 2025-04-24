@@ -8,5 +8,7 @@ namespace Server.Services.Interfaces
     {
         IMongoCollection<User> Users { get; }
         IMongoCollection<Token> Tokens { get; }
+
+        IMongoCollection<Category> Categories { get; }
     }
 }
